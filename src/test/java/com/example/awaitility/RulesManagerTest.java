@@ -38,7 +38,7 @@ public class RulesManagerTest {
     }
 
     @Test
-    public void verify_otherServiceCall() throws Exception {
+    public void otherService_call() throws Exception {
         //Given
         int rule = 123;
 
@@ -49,23 +49,4 @@ public class RulesManagerTest {
         await().untilAsserted(()
                 -> Mockito.verify(otherService).doSth());
     }
-
-    @Test
-    public void clean() throws Exception {
-        //Given
-        rulesManager.addRule(1);
-        rulesManager.addRule(2);
-        rulesManager.addRule(3);
-
-        await()
-                .atMost(new Duration(11, TimeUnit.SECONDS))
-                .untilAsserted(() -> assertThat(rulesManager.fetchRules()).hasSize(3));
-
-        //When
-        rulesManager.cleanUp();
-
-        //Then
-        await().until(() -> rulesManager.fetchRules().size() == 0);
-    }
-
 }
