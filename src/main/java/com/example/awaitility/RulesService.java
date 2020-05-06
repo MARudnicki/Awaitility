@@ -23,22 +23,10 @@ public class RulesService {
         new Thread(() -> addRule(data)).start();
     }
 
-    public void removeAllRules() {
-        new Thread(this::removeAll).start();
-    }
-
     @SneakyThrows
     private void addRule(int data) {
         TimeUnit.SECONDS.sleep(RANDOM.nextInt(10));
         rules.add(data);
         System.out.println("Rule added " + data);
     }
-
-    @SneakyThrows
-    private void removeAll() {
-        TimeUnit.SECONDS.sleep(RANDOM.nextInt(5));
-        rules.clear();
-        System.out.println("Rules erased");
-    }
-
 }
